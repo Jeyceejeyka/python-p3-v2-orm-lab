@@ -17,7 +17,7 @@ class Department:
 
     @property
     def name(self):
-        return self._name
+        return self._name if hasattr(self, '_name') else None
 
     @name.setter
     def name(self, name):
@@ -30,7 +30,7 @@ class Department:
 
     @property
     def location(self):
-        return self._location
+        return self._location if hasattr(self, '_location') else None
 
     @location.setter
     def location(self, location):

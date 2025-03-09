@@ -51,7 +51,7 @@ class Employee:
 
     @department_id.setter
     def department_id(self, department_id):
-        if type(department_id) is int and Department.find_by_id(department_id):
+        if isinstance(department_id, int) and Department.find_by_id(department_id):
             self._department_id = department_id
         else:
             raise ValueError(

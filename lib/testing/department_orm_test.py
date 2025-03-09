@@ -1,5 +1,5 @@
-from __init__ import CONN, CURSOR
-from department import Department
+from lib.department import Department
+from lib import CONN, CURSOR
 import pytest
 
 
@@ -208,15 +208,19 @@ class TestDepartment:
 
     
     def test_get_employees(self):
-        '''contain a method "employees" that gets the employees for the current Department instance '''
+        '''contain a method "employees" that gets the employees for the current Department instance'''
 
-        from employee import Employee  # avoid circular import issue
-        Employee.all = {}
+
+
+
+
+
+        from lib.employee import Employee  # avoid circular import issue
+        Employee.all = {}  
 
         Department.create_table()
         department1 = Department.create("Payroll", "Building A, 5th Floor")
-        department2 = Department.create(
-            "Human Resources", "Building C, 2nd Floor")
+        department2 = Department.create("Human Resources", "Building C, 2nd Floor")
 
         Employee.create_table()
         employee1 = Employee.create("Raha", "Accountant", department1.id)
@@ -225,8 +229,19 @@ class TestDepartment:
         employee3 = Employee.create("Amir", "Manager", department2.id)
 
         employees = department1.employees()
-        assert (len(employees) == 2)
+        assert (len(employees) == 2)  
         assert ((employees[0].id, employees[0].name, employees[0].job_title, employees[0].department_id) ==
                 (employee1.id, employee1.name, employee1.job_title, employee1.department_id))
         assert ((employees[1].id, employees[1].name, employees[1].job_title, employees[1].department_id) ==
                 (employee2.id, employee2.name, employee2.job_title, employee2.department_id))
+
+
+
+from lib.employee import Employee
+from lib.department import Department
+from lib import CONN, CURSOR
+import pytest
+
+
+class TestEmployee:
+    pass
